@@ -33,25 +33,19 @@ def create_schedule():
     for group in groups:
         for weekday in weekdays:
             for time in times:
-                # Choose a random professor
                 professor = random.choice(list(professors_info.keys()))
 
-                # Ensure the professor has at least one subject assigned
                 if professors_info[professor]["subjects"]:
-                    # Choose a random subject taught by the selected professor
                     subject = random.choice(professors_info[professor]["subjects"])
 
                     room = random.choice(rooms)
 
-                    # Check if the professor already has a class at this time and day
                     if not any(value[0] == professor for key, value in schedule.items() if
                                key[1] == weekday and key[2] == time):
 
-                        # Check if the professor has not exceeded the maximum hours
                         if professors_info[professor]["current_hours"] < professors_info[professor]["max_hours"]:
                             schedule[(group, weekday, time)] = (professor, subject, room)
 
-                            # Update the current hours for the professor
                             professors_info[professor]["current_hours"] += 1
 
     return schedule
@@ -60,7 +54,6 @@ def create_schedule():
 # Функція оцінки якості розкладу
 def heuristic(schedule):
     cost = 0
-    # Додайте сюди свої критерії оцінки
     return cost
 
 # Генетичний алгоритм
